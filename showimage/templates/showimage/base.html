@@ -1,0 +1,69 @@
+
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>啵唧电影屋</title>
+    <style>
+        .pan_setting{
+            padding-top:30px;
+        }
+        .text_setting {
+            line-height: 100px; 
+            vertical-align: middle; 
+            text-align: center;
+        }
+    </style>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+  </head>
+
+  <body class="pan_setting">
+    <!-- 导航条固定在顶部 -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                  data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+                </button>
+                <a class="navbar-brand" href="{% url 'showimage:index' %}">啵唧电影屋</a>
+            </div> 
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{% url 'showimage:index' %}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'showimage:images' %}">最新影片</a>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!--/.nav-collapse--->
+    
+    <div class="container">
+        <div class="page-header">
+            {% block header %}
+            {% endblock header %}
+        </div>
+        <div>
+            {% block content %}
+            {% endblock content %}  
+        </div>
+    </div>
+
+  </body>
+</html>
