@@ -1,0 +1,43 @@
+   
+{% extends "showimage/base.html" %}
+
+
+{% load bootstrap3 %}
+
+{% block header %}
+    <h4>影片简介</h4>
+{% endblock header %}
+
+
+
+{% block content %}
+    <div class="container" >
+    <div class="media">
+        <div class="media-left media-middle">
+            <img src="/img/{{ movie_file }}" width="180px" height="240px" class="media-object">
+        </div>
+        <div class="media-body">
+            <p>
+                <li>
+                    <b>影片名：</b>{{ movie_name }}
+                </li>
+                <li>
+                    <b>上映时间：</b>{{ movie_releasetime }}
+                </li>
+                <li>
+                    <b>导演：</b><i>{{ movie_director }}</i>
+                </li>
+                <li>
+                    <b>类型：</b>{{ movie_type}}
+                </li>
+                <li>
+                    <b>剧情简介：</b>{{ movie_Synopsis }}
+                </li>
+            </p>
+        </div>
+    </div>
+    </div>
+{% endblock content %}     
+
+    
+
