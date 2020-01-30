@@ -20,11 +20,14 @@ def get_Jsonfile():
     return content
 
 
-
-img_list = []
+resultfile = description_path + "\\" + 'result.json'
+q=input("关键字：")
 content=get_Jsonfile()
-for itmovie in content["movies"]:
-    itmovie
-    img_list.append(itmovie["name"])
+movies = content["movies"]
+movies_result = {'movies':[]}
+for itMovie in movies:
+    if q in itMovie["name"]:
+       movies_result['movies'].append(itMovie)
+with open(resultfile,mode="w",encoding="utf-8") as file_object:
+    json.dump(movies_result,file_object,ensure_ascii=False)
 
-print(img_list[1])

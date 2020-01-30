@@ -14,24 +14,24 @@
     <div class="container" >
     <div class="media">
         <div class="media-left media-middle">
-            <img src="/img/{{ movie_file }}" width="180px" height="240px" class="media-object">
+            <img src="/img/{{ itMovie.file }}" width="210px" height="280px" class="media-object">
         </div>
         <div class="media-body">
             <p>
                 <li>
-                    <b>影片名：</b>{{ movie_name }}
+                    <b>影片名：</b>{{ itMovie.name }}
                 </li>
                 <li>
-                    <b>上映时间：</b>{{ movie_releasetime }}
+                    <b>上映时间：</b>{{ itMovie.releasetime }}
                 </li>
                 <li>
-                    <b>导演：</b><i>{{ movie_director }}</i>
+                    <b>导演：</b><i>{{ itMovie.director }}</i>
                 </li>
                 <li>
-                    <b>类型：</b>{{ movie_type}}
+                    <b>类型：</b>{{ itMovie.type}}
                 </li>
                 <li>
-                    <b>剧情简介：</b>{{ movie_Synopsis }}
+                    <b>剧情简介：</b>{{ itMovie.Synopsis }}
                 </li>
             </p>
         </div>

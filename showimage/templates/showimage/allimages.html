@@ -15,19 +15,16 @@
         {% for movie in movies %}
             <div class="col-xs-6 col-md-4 col-lg-3 text_setting">
                 <div class="thumbnail">
-                    <img src="/img/{{ movie.file }}" width="210px" height="280px">
-                
+                    <img src="/img/{{ movie.file }}">
                     <div class="caption" >
                         <h5>
                             <a href="{% url 'showimage:get_description' movie.file %}">{{ movie.name }}</a>
                         </h5>
                     </div>
-
                 </div>
             </div>    
         {% endfor %}
+
     </div>
-    
-    
 
 {% endblock content %}
