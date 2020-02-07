@@ -1,42 +1,70 @@
-   
 {% extends "showimage/base.html" %}
 
 
 {% load bootstrap3 %}
 
-{% block header %}
-    <h4>影片简介</h4>
-{% endblock header %}
-
-
 
 {% block content %}
-    <div class="container" >
-    <div class="media">
-        <div class="media-left media-middle">
-            <img src="/img/{{ itMovie.file }}" width="210px" height="280px" class="media-object">
-        </div>
-        <div class="media-body">
-            <p>
-                <li>
-                    <b>影片名：</b>{{ itMovie.name }}
-                </li>
-                <li>
-                    <b>上映时间：</b>{{ itMovie.releasetime }}
-                </li>
-                <li>
-                    <b>导演：</b><i>{{ itMovie.director }}</i>
-                </li>
-                <li>
-                    <b>类型：</b>{{ itMovie.type}}
-                </li>
-                <li>
-                    <b>剧情简介：</b>{{ itMovie.Synopsis }}
-                </li>
-            </p>
+
+<div>
+    <div class="db_bodyout">
+        <div class="db_bodybg">
+            <div class="db_topcont">
+                <div class="db_coverinner">
+                    <img src="/img/{{ itMovie.file }}" class="db_coverpicbox img-rounded image-responsive center-block">
+                </div>
+                <div class="db_ihead">
+                    <div class="db_head">
+                        <div class="clearfix">
+                            <span style="font-size:35px;"><strong>{{ itMovie.name }}</strong></span>
+                            <span class="db_year" style="font-size:30px;">({{ itMovie.year }})</span>
+                            <!-- <h1><strong>{{ itMovie.name }}</strong></h1>
+                            <p class="db_year" style="font-size:30px;">({{ itMovie.year }})</p> -->
+                            <p class="db_enname" style="font-size:25px;">{{ itMovie.enname }}</p>
+                        </div>
+                        <div class="otherbox">
+                            <span>{{ itMovie.duration}}</span> - 
+                            <span>{{ itMovie.type}}</span> - 
+                            <span>{{ itMovie.releasetime }}上映</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="db_contout">
+                    <div class="db_cont">
+                        <div class="clearfix">
+                            <div class="base">
+                                <dl class="info">
+                                    <dd>
+                                        <strong>导演：</strong>
+                                        <span>{{ itMovie.director }}</span>
+                                    </dd>
+                                    <dd>
+                                        <strong>上映时间：</strong>
+                                        <span>{{ itMovie.releasetime }}</span>
+                                    </dd>
+                                    <dd>
+                                        <strong>类型：</strong>
+                                        <span>{{ itMovie.type}}</span>
+                                    </dd>
+                                    <dt>
+                                        <h4 class="mt01"><strong>剧情简介：</strong></h4>
+                                        <p class="mt02">{{ itMovie.Synopsis }}</p>
+                                        <p class="mt03"> 
+                                            <a href="#">更多剧情</a>
+                                            <i class="gt"></i>
+                                        </p>
+                                    </dt>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+</div>
+
+
 {% endblock content %}     
 
     

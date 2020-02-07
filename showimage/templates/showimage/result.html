@@ -2,14 +2,10 @@
 
 {% load bootstrap3 %}
 
-{% block header %}
-    <h4>搜索结果</h4>
-{% endblock header %}
-
-
 
 {% block content %}
 
+<div class="container pan_setting">
     {% if movies_result %}
         <div class="row row_setting">
             {% for movie in movies_result %}
@@ -30,6 +26,6 @@
             <h4>很抱歉，没有找到相关内容。</h4>
         </div>
     {% endif %}
-
+</div>
 
 {% endblock content %}

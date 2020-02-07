@@ -2,29 +2,55 @@
 
 {% load bootstrap3 %}
 
-{% block header %}
-    <h4>影片列表</h4>
-{% endblock header %}
-
-
 
 {% block content %}
 
-    <div class="row row_setting">
+<div class="pan_setting">
+    <div class="container">
 
-        {% for movie in movies %}
-            <div class="col-xs-6 col-md-4 col-lg-3 text_setting">
-                <div class="thumbnail">
-                    <img src="/img/{{ movie.file }}">
-                    <div class="caption" >
-                        <h5>
-                            <a href="{% url 'showimage:get_description' movie.file %}">{{ movie.name }}</a>
-                        </h5>
+        <div class="row row_setting">
+
+            {% for movie in movies %}
+                <div class="col-xs-6 col-md-4 col-lg-3 text_setting">
+                    <div class="thumbnail">
+                        <img src="/img/{{ movie.file }}">
+                        <div class="caption" >
+                            <h5>
+                                <a href="{% url 'showimage:get_description' movie.file %}">《{{ movie.name }}》</a>
+                            </h5>
+                        </div>
                     </div>
-                </div>
-            </div>    
-        {% endfor %}
+                </div>    
+            {% endfor %}
 
-    </div>
+        </div>
 
+        <div id="backtotop">
+            <div class="top"><span title="back to top"></span></div>
+            <script type="text/javascript">
+                /* <!--$(windows).scroll是监听页面滚动事件--> */
+                /* <!--如果需要监听其他的滚动事件，把windows换成你要监听的DOM就行-->  */
+                $(window).scroll(function () {    
+                    /* <!--当页面滚动条的垂直偏移超过300时显示，否则隐藏--> */
+                    if ($(window).scrollTop() > 300) {
+                        $("#backtotop").fadeIn();  
+                        /* //fadeIN，fadeOut时渐入渐出，需要别的动画可以自己改 */
+                    } else {
+                        $("#backtotop").fadeOut();
+                    }
+                });
+
+                $("div#backtotop").click(function () {    
+                    /* <!--点击按钮时回到顶部，速度位500--> */
+                    $("body,html").animate({
+                        scrollTop: 0
+                    }, 500);
+                });
+            </script>
+        </div><!--#backtotop-->
+    </div><!--container-->
+</div><!--pan_setting-->
+
+    <!-- 以下可以实现点击回到顶部，但是太过于简单 -->
+    <!-- <a class="btn btn-default" href="#" role="button" style="position:fixed;right:50px;bottom:50px">回到顶部</a> -->
 {% endblock content %}

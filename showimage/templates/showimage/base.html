@@ -14,11 +14,7 @@
 
     <link href="/style/base.css" rel="stylesheet">
     
-
     <style>
-        .pan_setting{
-            padding-top:30px;
-        }
         .text_setting {
             line-height: 100px; 
             vertical-align: middle; 
@@ -26,7 +22,7 @@
         }
         .row_setting {
             height:0px;
-            padding-bottom:100%
+            padding-bottom:100%;
         }
     </style>
     
@@ -48,7 +44,6 @@
   </head>
 
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
 
@@ -57,7 +52,11 @@
                   data-toggle="collapse" data-target="#navbar"
                   aria-expanded="false" aria-controls="navbar">
                 </button>
-                <a class="navbar-brand" href="{% url 'showimage:index' %}">啵唧电影屋</a>
+                <a class="navbar-brand" href="{% url 'showimage:index' %}">
+                    <img alt="Brand" style="max-width:80px;margin-top:-10px;" src="/img/logo.png">
+                </a>
+                <a class="navbar-brand" href="{% url 'showimage:index' %}"><p><b>啵唧电影屋</b></p></a>
+
             </div> 
 
             <div id="navbar" class="navbar-collapse collapse">
@@ -73,7 +72,7 @@
                         <a href="{% url 'showimage:index' %}">首页</a>
                     </li>
                     <li class="box">
-                        <a href="{% url 'showimage:get_Allimgfiles' %}">最新影片</a>
+                        <a href="{% url 'showimage:get_Allimgfiles' %}">全部影片</a>
                     </li>
                     <li class="box">
                         <a href="{% url 'showimage:about' %}">关于</a>
@@ -85,15 +84,9 @@
     </nav>
     <!--/.nav-collapse--->
 
-    <div class="container">
-        <div class="page-header">
-            {% block header %}
-            {% endblock header %}
-        </div>
-        <div>
-            {% block content %}
-            {% endblock content %}  
-        </div>
+    <div>
+        {% block content %}
+        {% endblock content %}  
     </div>
 
     <script type="text/javascript">
@@ -121,10 +114,18 @@
     
    
     <footer class="box-footer">
-        <p>
-            Template built for<a href="http://getbootstrap.com"> Bootstrap </a>by Yilee.
-            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>1593880130@qq.com
-        </p>       
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <p>
+                            Template built for<a href="http://getbootstrap.com"> Bootstrap </a>by Yilee.
+                            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>1593880130@qq.com
+                        </p> 
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 
   </body>
