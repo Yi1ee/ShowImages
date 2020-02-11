@@ -9,11 +9,11 @@ import json
 imagespath = "C:\\project\\ShowImages\\static_files\\poster_images"
 stylespath = "C:\\project\\ShowImages\\static_files\\CSS"
 description_path="C:\\project\\ShowImages\\static_files\\description_files"
-filename =description_path + "\\" + 'movies_description.json'
 resultfile =description_path + "\\" + 'result.json'
 
 def get_Jsonfile():
     '''获取json文件中的内容'''
+    filename =description_path + "\\" + 'movies_description.json'
     with open(filename, encoding="utf-8") as file_object:
         content = json.load(file_object)
     return content

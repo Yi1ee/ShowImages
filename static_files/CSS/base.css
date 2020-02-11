@@ -18,6 +18,10 @@
  .pan_setting {
   padding-top:60px;
 }
+body a:hover,
+body a:focus {
+  text-decoration:none;
+}
 /*
  * Override Bootstrap's default container.
  */
@@ -94,39 +98,22 @@
   transform: translate(-50%, -50%);
 }
 
-
-/* Extra markup and styles for table-esque vertical and horizontal centering */
-.site-wrapper {
-  display: table;
-  width: 100%;
-  height: 100%; /* For at least Firefox */
-  min-height: 100%;
-  /* -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5); */
-}
-.site-wrapper-inner {
-  display: table-cell;
-  vertical-align: top;
-}
-.cover-container {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-
 /*
 back to top
 */
 
+
 #backtotop{
   float: right;
-  text-align: center;
-  display: none;
+  /* display: none; */
   clear: both;
   position: fixed;
+  text-align: center;
   bottom: 5%;
   right: 10px;
   cursor: pointer;
+  zoom:1
+
 }
 .top{
 	width: 35px;
@@ -136,13 +123,13 @@ back to top
   border-radius: 25px;
   position: fixed;
   bottom: 5%;
-  right: 10px;
+  right: 30px;
   background-image: url(icon_Top.png);
   background-size: 30px;
   background-repeat: no-repeat;
   background-position-x: 50%;
   background-position-y: 50%;
-}
+} 
 
 /*
  * description background
@@ -152,8 +139,9 @@ back to top
   background: #fff;
   position: relative;
   width: 100%;
-  height: 60%;
-  zoom:1
+  /* height: 60%; */
+  zoom:1;
+  z-index: 1;
 }
 .db_bodybg {
   background:#127bab;
@@ -163,7 +151,7 @@ back to top
   left: 0;
   top: 0;
   z-index: 10;
-  zoom:1
+  zoom:1;
 }
 .db_topcont {
   background: #fff;
@@ -175,7 +163,7 @@ back to top
   top: 100px;
   left: 10%;
   margin: 0 auto;
-  zoom:1
+  zoom:1;
 }
 .db_coverinner {
   position: absolute;
@@ -305,7 +293,98 @@ back to top
   vertical-align: middle;
 }
 /*
-description background
+allimages background
 */
-
-
+.left_col {
+  float: left;
+  display: block;
+  width: 75%;
+}
+.left_col .item {
+  display: block;
+  color: #37a;
+  font-size: 13px;
+  text-align: center;
+}
+/*
+Ranking List background
+*/
+.right_col {
+  float: right;
+  display: block;
+  width: 25%;
+}
+.mt04{
+  margin-top: 15px;
+  margin-left: 25px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.data_top {
+  margin-top: 5px;
+}
+.data_top li {
+  border-bottom: 1px dashed #bbb;
+  padding: 5px 0 5px 35px;
+  position: relative;
+  clear: both;
+  overflow: hidden;
+  zoom: 1;
+}
+/* .on {
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  display: block;
+  clear: both;
+} */
+.data_top li em {
+  position: absolute;
+  left: 3px;
+  top: 10px;
+}
+.num{
+  font-size: 20px;
+  font-weight: bold;
+  color: cadetblue  ;
+}
+.data_top li.on .table{
+  display: none;
+}
+.data_top li strong {
+  float: right;
+  color: #e76f00;
+}
+.table .t_r {
+  display: table-row;
+}
+.table .td {
+  display: table-cell;
+  vertical-align: top;
+  *float: left;
+}
+.img_box {
+  margin-top: 10px;
+  border: 1px solid #000;
+}
+.point {
+  font-family: tahoma;
+  font-weight: bold;
+  float: left;
+  display: inline;
+}
+.point .total {
+  font-size: 1.8em;
+  padding: 1px 0;
+  float: left;
+  display: inline;
+  color: #f07200;
+  line-height: 1em;
+}
+.point .total2 {
+  color: #f07200;
+  font-size: 1.2em;
+  float: left;
+  display: inline;
+  line-height: 1em;
+}
