@@ -86,23 +86,18 @@ body a:focus {
 /*
  * index background
  */
-/* .bg {
-  background:url(A.jpeg);
-
-} */
-
-.cover {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+ .carousel-inner img {
+  width: 100%;
+  height: 100%;
 }
+.carousel-inner .item {
+  height: 360px;
+}
+
 
 /*
 back to top
 */
-
-
 #backtotop{
   float: right;
   /* display: none; */
@@ -306,6 +301,7 @@ allimages background
   font-size: 13px;
   text-align: center;
 }
+
 /*
 Ranking List background
 */

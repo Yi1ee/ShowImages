@@ -10,6 +10,7 @@ imagespath = "C:\\project\\ShowImages\\static_files\\poster_images"
 stylespath = "C:\\project\\ShowImages\\static_files\\CSS"
 description_path="C:\\project\\ShowImages\\static_files\\description_files"
 resultfile =description_path + "\\" + 'result.json'
+index_path="C:\\project\\ShowImages\\static_files\\index_files"
 
 def get_Jsonfile():
     '''获取json文件中的内容'''
@@ -22,6 +23,13 @@ def get_Jsonfile():
 def index(request):
     '''显示界面主页'''
     return render(request,'showimage/index.html')
+
+def get_index(request,index_file):
+    '''某一特定海报的界面'''
+    filepath =index_path + "\\"+ index_file
+    with open(filepath, 'rb') as f:
+        index_data = f.read()
+    return HttpResponse(index_data, content_type="image/jpg")
 
 def about(request):
     '''显示about界面'''

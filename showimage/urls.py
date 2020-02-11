@@ -10,6 +10,8 @@ urlpatterns = [
     
     re_path(r'^img/(?P<img_file>.*)$', views.img, name='img'),
 
+    re_path(r'^index/(?P<index_file>.*)$', views.get_index, name='get_index'),
+
     re_path(r'^style/(?P<style_file>.*)$', views.style, name='style'),
 
     re_path(r'^allimages/$', views.get_Allimgfiles, name='get_Allimgfiles'),
