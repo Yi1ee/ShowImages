@@ -11,20 +11,20 @@
         <div class="db_bodybg">
             <div class="db_topcont">
                 <div class="db_coverinner">
-                    <img src="/img/{{ itMovie.file }}" class="db_coverpicbox img-rounded image-responsive center-block">
+                    <img src="/img/{{ itMovie.filename }}" class="db_coverpicbox img-rounded image-responsive center-block">
                 </div>
                 <div class="db_ihead">
                     <div class="db_head">
                         <div class="clearfix">
-                            <span style="font-size:35px;"><strong>{{ itMovie.name }}</strong></span>
-                            <span class="db_year" style="font-size:30px;">({{ itMovie.year }})</span>
+                            <span style="font-size:35px;"><strong>{{ itMovie.cname }}</strong></span>
+                            <!-- <span class="db_year" style="font-size:30px;">({{ itMovie.year }})</span> -->
                             <!-- <h1><strong>{{ itMovie.name }}</strong></h1>
                             <p class="db_year" style="font-size:30px;">({{ itMovie.year }})</p> -->
                             <p class="db_enname" style="font-size:25px;">{{ itMovie.enname }}</p>
                         </div>
                         <div class="otherbox">
-                            <span>{{ itMovie.duration}}</span> - 
-                            <span>{{ itMovie.type}}</span> - 
+                            <span>{{ itMovie.runtime}}</span> - 
+                            <span>{{ itMovie.types}}</span> - 
                             <span>{{ itMovie.releasetime }}上映</span>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                     </dd>
                                     <dd>
                                         <strong>类型：</strong>
-                                        <span>{{ itMovie.type }}</span>
+                                        <span>{{ itMovie.types }}</span>
                                     </dd>
                                     <dd>
                                         <strong>主要演员：</strong>
@@ -52,7 +52,7 @@
                                     </dd>
                                     <dt>
                                         <h4 class="mt01"><strong>剧情简介：</strong></h4>
-                                        <p class="mt02">{{ itMovie.Synopsis }}</p>
+                                        <p class="mt02">{{ itMovie.introduction }}</p>
                                         <p class="mt03"> 
                                             <a href="#">更多剧情</a>
                                             <i class="gt"></i>

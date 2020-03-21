@@ -1,0 +1,164 @@
+{% extends "showimage/base.html " %}
+
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+<div class="pan_setting">
+    <div class="container">
+        <div class="Ranking_left_col">
+            <h3 class="mt04">本月热度排行榜TOP10</h3>
+            <div class="data_top">
+                <ul>
+                    {% for movie in heat_movies_list %}
+                    <li>
+                        <em class="hot_num">{{ movie.top_id }}</em> 
+                        <div class="table"  style="margin-bottom: 5px;"> 
+                            <div class="t_r"> 
+                                <a href="{% url 'showimage:get_description' movie.filename %}"> 
+                                    <div class="td"> 
+                                            <img width="75" height="100" class="img_box" src="/img/{{ movie.filename }}">
+                                    </div> 
+                                    <div  class="td" style="padding-left: 20px;"> 
+                                        <h4>
+                                            <!-- {{ movie.cname }}<br>{{ movie.enname }} -->
+                                            {{ movie.cname }} / {{ movie.enname }}
+                                        </h4> 
+                                        <p class="al0">类型：{{ movie.types }}</p>
+                                        <p class="al0">导演：{{ movie.director }}</p>
+                                        <p class="al0">主演：{{ movie.actors }}</p>
+                                    </div>
+                                </a>
+                            </div> 
+                        </div> 
+                    </li>
+                    {% endfor %}
+                </ul>
+                <p class="tr mt6"> 
+                    <a href="{% url 'showimage:AllMovies' %}">更多内容
+                        <!-- 包含符号"<<" -->
+                        <span class="cl0">&gt;&gt;</span> 
+                    </a>
+                </p>
+            </div><!--data_top-->
+        </div><!--left_col-->
+        <div class="right_col">
+            <div>
+                <h3 class="mt04">高分排行榜TOP10</h3>
+                <div class="data_top">
+                    <ul>
+                        {% for movie in top_movies_list %}
+                        <li>
+                            <em class="num">{{ movie.top_id }}</em> 
+                            <!-- <div class="clearfix">
+                                <a href="{% url 'showimage:get_description' movie.file %}">{{ movie.name }}</a>
+                                <strong>{{ movie.mark }}</strong>
+                            </div>  -->
+                            <div class="table" style="margin-bottom: 5px;"> 
+                                <div class="t_r"> 
+                                    <a href="{% url 'showimage:get_description' movie.filename %}"> 
+                                        <div class="td"> 
+                                                <img width="75" height="100" class="img_box" src="/img/{{ movie.filename }}">
+                                        </div> 
+                                        <div class="td" style="padding-left: 14px;"> 
+                                            <h3 style="font-size: 14px;"> 
+                                                {{ movie.cname }}<br>{{ movie.enname }}
+                                            </h3> 
+                                            <div class="clearfix" style="margin-top: 9px;"> 
+                                                <p class="point"> 
+                                                    <span class="total">{{ movie.score_integer }}</span>
+                                                    <span class="total2">{{ movie.score_fraction }}</span>	
+                                                </p> 
+                                            </div> 
+                                        </div> 
+                                    </a>
+                                </div> 
+                            </div> 
+                        </li>
+                        {% endfor %}
+                        
+                        <script type="text/javascript">
+                            // window.onload = function(){
+                            //     var box1 = document.getElementsByClassName('clearfix');
+                            //     var box2 = document.getElementsByClassName('table');
+                                
+                            //     $(".clearfix").each(function(index){
+                            //             //移入事件
+                            //         $(this).mouseenter(function(obj) {
+                            //             //根据下标改变display属性：box1隐藏，box2显示
+                            //             box1[index].style.display = "none";
+                            //             box2[index].style.display = "block";
+                            //         });
+                            //     });
+
+                            //     $(".clearfix").each(function(index){
+                            //             //移出事件
+                            //         $(this).mouseleave(function(obj) {
+                            //             //根据下标改变display属性：box1显示，box2隐藏
+                            //         box1[index].style.display = "block";
+                            //         box2[index].style.display = "none";
+                            //         });
+                            //     });
+                            // };
+                            // export default {
+                            //     methods: {
+                            //     changeActive($event) {
+                            //         $event.currentTarget.className = 'on';
+                            //     },
+                            //     removeActive($event) {
+                            //         $event.currentTarget.className = '';
+                            //     }
+                            //     }
+                            // };
+                        </script>
+                    </ul>
+                    <p class="tr mt6"> 
+                        <a href="{% url 'showimage:AllMovies' %}">更多内容
+                            <!-- 包含符号"<<" -->
+                            <span class="cl0">&gt;&gt;</span> 
+                        </a>
+                    </p>
+                </div><!--data_top-->
+            </div>
+        </div><!--right_col-->
+        
+        <div id="backtotop">
+            <div class="top"><span title="back to top"></span></div>
+            <script type="text/javascript">
+                /* <!--$(windows).scroll是监听页面滚动事件--> */
+                /* <!--如果需要监听其他的滚动事件，把windows换成你要监听的DOM就行-->  */
+                $(window).scroll(function () {    
+                    /* <!--当页面滚动条的垂直偏移超过300时显示，否则隐藏--> */
+                    if ($(window).scrollTop() > 300) {
+                        $("#backtotop").fadeIn();  
+                        /* //fadeIN，fadeOut时渐入渐出，需要别的动画可以自己改 */
+                    } else {
+                        $("#backtotop").fadeOut();
+                    }
+                });
+
+                $("div#backtotop").click(function () {    
+                    /* <!--点击按钮时回到顶部，速度位500--> */
+                    $("body,html").animate({
+                        scrollTop: 0
+                    }, 500);
+                });
+            </script>
+        </div><!--#backtotop-->
+    </div><!--container-->
+</div><!--pan_setting-->
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer_display">
+            <p>
+                Template built for<a href="http://getbootstrap.com"> Bootstrap </a>by Yilee.
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>1593880130@qq.com
+            </p> 
+        </div>
+    </div>
+</footer>
+    <!-- 以下可以实现点击回到顶部，但是太过于简单 -->
+    <!-- <a class="btn btn-default" href="#" role="button" style="position:fixed;right:50px;bottom:50px">回到顶部</a> -->
+{% endblock content %}

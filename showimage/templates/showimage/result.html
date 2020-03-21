@@ -9,21 +9,23 @@
     {% if movies_result %}
         <div class="row row_setting">
             {% for movie in movies_result %}
-                <div class="col-xs-6 col-md-4 col-lg-3 text_setting">
+                <div class="col-xs-2 col-md-2 col-lg-2 text_setting">
                     <div class="thumbnail">
-                        <img src="/img/{{ movie.file }}">
-                        <div class="caption" >
-                            <h5>
-                                <a href="{% url 'showimage:get_description' movie.file %}">{{ movie.name }}</a>
-                            </h5>
-                        </div>
+                        <a href="{% url 'showimage:get_description' movie.filename %}">
+                            <img src="/img/{{ movie.filename }}">
+                            <div class="caption" style="height: 45px;">
+                                <p class="item">{{ movie.cname }} 
+                                    <storng style="color: #e09015;">{{ movie.score }}</storng>
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>    
             {% endfor %}
         </div>
     {% else %}
         <div>
-            <h4>很抱歉，没有找到相关内容。</h4>
+            <h4>很抱歉，未能找到相关内容。</h4>
         </div>
     {% endif %}
 </div>

@@ -1,0 +1,65 @@
+{% extends "showimage/base.html " %}
+
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+<div class="pan_setting">
+    <div class="container">
+        <div class="row row_setting">
+            {% for movie in all_movies_list %}
+                <div class="col-xs-2 col-md-2 col-lg-2 text_setting">
+                    <div class="thumbnail">
+                        <a href="{% url 'showimage:get_description' movie.filename %}">
+                            <img src="/img/{{ movie.filename }}">
+                            <div class="caption" style="height: 45px;">
+                                <p class="item">{{ movie.cname }} 
+                                    <storng style="color: #e09015;">{{ movie.score }}</storng>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div> 
+            {% endfor %}
+        </div>
+    
+        <div id="backtotop">
+            <div class="top"><span title="back to top"></span></div>
+            <script type="text/javascript">
+                /* <!--$(windows).scroll是监听页面滚动事件--> */
+                /* <!--如果需要监听其他的滚动事件，把windows换成你要监听的DOM就行-->  */
+                $(window).scroll(function () {    
+                    /* <!--当页面滚动条的垂直偏移超过300时显示，否则隐藏--> */
+                    if ($(window).scrollTop() > 300) {
+                        $("#backtotop").fadeIn();  
+                        /* //fadeIN，fadeOut时渐入渐出，需要别的动画可以自己改 */
+                    } else {
+                        $("#backtotop").fadeOut();
+                    }
+                });
+
+                $("div#backtotop").click(function () {    
+                    /* <!--点击按钮时回到顶部，速度位500--> */
+                    $("body,html").animate({
+                        scrollTop: 0
+                    }, 500);
+                });
+            </script>
+        </div><!--#backtotop-->
+    </div><!--container-->
+</div><!--pan_setting-->
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer_display">
+            <p>
+                Template built for<a href="http://getbootstrap.com"> Bootstrap </a>by Yilee.
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>1593880130@qq.com
+            </p> 
+        </div>
+    </div>
+</footer>
+    <!-- 以下可以实现点击回到顶部，但是太过于简单 -->
+    <!-- <a class="btn btn-default" href="#" role="button" style="position:fixed;right:50px;bottom:50px">回到顶部</a> -->
+{% endblock content %}

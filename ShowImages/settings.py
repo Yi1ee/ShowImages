@@ -79,8 +79,16 @@ WSGI_APPLICATION = 'ShowImages.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # python自带的一个数据库，基本不会被使用
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 注册我们自己使用的数据库连接
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        'NAME': 'st0ne77', #数据库名称
+        'USER':'root', # 连接数据库的用户名称
+        'PASSWORD':'sxw0506#',  # 用户密码
+        'HOST':'182.61.6.91', # 访问的数据库的主机的ip地址
+        'PORT':'3306', # 默认mysql访问端口
     }
 }
 
