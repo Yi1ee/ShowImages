@@ -3,10 +3,16 @@ from django.http import HttpResponse,Http404        # 可以返回渲染的页�
 from django.contrib import messages
 import os
 import json
+import logging
+
+logger = logging.getLogger("django")
 
 from .models import All_movies   # 导入所有电影的模型类
 from .models import Top_movies   # 导入高分排行榜电影的模型类
 from .models import Heat_movies  # 导入本月热度排行榜电影的模型类
+from .models import MoviesForm   
+from .models import Kind  
+
 
 # Create your views here.
 
@@ -62,6 +68,7 @@ def search(request):
     return render(request,'showimage/result.html',context)
 
 
+
 def get_index(request,index_file):
     '''获取首页轮播海报图片'''
     filepath =index_path + "\\"+ index_file
@@ -83,4 +90,55 @@ def style(request,style_file):
             style_data = f.read()
     return HttpResponse(style_data, content_type="text/css")
 
+
+def movies_tags(request,tag):
+    '''分类界面'''
+    movies_result={'movies':[]}
+    tag_result={'movies':[]}
+
+    all_movies_list = All_movies.objects.filter()
+    if tag == '':
+        movies_result = all_movies_list
+    else:
+        for itMovie in all_movies_list:
+            if tag in itMovie.types:
+                tag_result['movies'].append(itMovie)
+        movies_result = tag_result['movies']
+    context = {'movies_result':movies_result}
+    return render(request,'showimage/movies_tags.html',context)
+
+
+def MovieTags(request, *args, **kwargs):
+    # 给后台筛选数据库使用
+    condition = {}
+      
+    # 初始化传递参数，若无参则代表要显示所有类型下的电影
+    if not kwargs:
+        kwargs = {
+            'kind_id':0,
+        }
+    # 从kwargs中取出相应的id
+    kind_id = kwargs.get('kind_id')
+    
+    # 从数据库中取出所有的type列表，因为所有类型都要在页面上显示
+    kind_list = Kind.objects.all()
+    if kind_id == 0:
+        movies_list = MoviesForm.objects.filter()
+    else:
+        kind_obj = Kind.objects.get(id=kind_id)
+        movies_list = kind_obj.movie.all()
+
+       
+        logger.error("*********************yilee*****************", movies_list)
+
+
+    return render(
+        request,
+        'showimage/MovieTags.html',
+        {
+            'kind_list': kind_list,
+            'kwargs': kwargs,
+            'movies_list': movies_list,
+        }
+    )
 

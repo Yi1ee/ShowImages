@@ -25,7 +25,12 @@ urlpatterns = [
     # re_path(r'^images/$', views.images, name='images'),
     # re_path(r'^Jokerdescribe/$', views.Jokerdescribe, name='Jokerdescribe'),
 
-    
-   
+    #测试路径
+    re_path(r'^movies_tags/(?P<tag>.*)$', views.movies_tags, name='movies_tags'),
+      
+    # 通过正则表达式添加三个字段，从前台获取当前选择项
+    # re_path(r'^MovieTags/(?P<type_id>(\d+))&&(?P<area_id>(\d+))$', views.MovieTags, name='MovieTags'),
+    re_path(r'^MovieTags/$', views.MovieTags, name='MovieTags'),
+    re_path(r'^MovieTags/(?P<kind_id>(\d+))$', views.MovieTags, name='MovieTags'),
 
 ]
