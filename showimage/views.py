@@ -7,9 +7,10 @@ import logging
 
 logger = logging.getLogger("django")
 
-from .models import All_movies   # 导入所有电影的模型类
 from .models import Top_movies   # 导入高分排行榜电影的模型类
 from .models import Heat_movies  # 导入本月热度排行榜电影的模型类
+from .models import Animation_movies  # 导入动画电影排行榜电影的模型类
+
 from .models import MoviesForm   
 from .models import Kind         # 导入电影类型的模型类
 from .models import Area         # 导入电影地区的模型类
@@ -32,21 +33,17 @@ def about(request):
     '''显示about界面'''
     return render(request,'showimage/about.html')
 
-def AllMovies(request):
-    all_movies_list = All_movies.objects.filter()
-    context= {'all_movies_list':all_movies_list}
-    return render(request,'showimage/AllMovies.html',context)
-
 def RankingList(request):
     top_movies_list = Top_movies.objects.filter()
     heat_movies_list = Heat_movies.objects.filter()
-    context= {'top_movies_list':top_movies_list,'heat_movies_list':heat_movies_list}
+    animation_movies_list = Animation_movies.objects.filter()
+    context= {'top_movies_list':top_movies_list,'heat_movies_list':heat_movies_list,'animation_movies_list':animation_movies_list}
     return render(request,'showimage/RankingList.html',context)
 
 def get_description(request, img_file):
     '''返回点击某个特定电影后的对该电影更为具体描述的界面'''
-    all_movies_list = All_movies.objects.filter()
-    for itMovie in all_movies_list:
+    movies_list = MoviesForm.objects.filter()
+    for itMovie in movies_list:
         if itMovie.filename == img_file:
             '''电影海报唯一，根据文件定位特定内容'''
             context = {'itMovie':itMovie}
@@ -57,7 +54,7 @@ def get_description(request, img_file):
 def search(request):
     q=request.GET.get('q')
     #content = get_Jsonfile()
-    all_movies_list = All_movies.objects.filter()
+    all_movies_list = MoviesForm.objects.filter()
 
     search_result={'movies':[]}
     #创建一个新的JSON对象result存储搜索结果
@@ -93,9 +90,8 @@ def style(request,style_file):
 
 
 
-def MovieTags(request, *args, **kwargs):
-    '''全部电影界面的分类功能'''
-      
+def Movies_Tags(request, *args, **kwargs):
+    '''全部电影界面以及分类功能'''
     # 初始化传递参数，若无传参则代表要显示全部的电影
     if not kwargs:
         kwargs = {
@@ -132,11 +128,11 @@ def MovieTags(request, *args, **kwargs):
             movies_list_area = area_obj.movie.all()
             #返回的是两个Queryset的交集并去掉重复值，如是需要返回交集把&替换为|即可
             movies_list = (movies_list_kind & movies_list_area).distinct()
-            logger.error("*********************yilee*****************", movies_list)
+            #logger.error("*********************yilee*****************", movies_list)
 
     return render(
         request,
-        'showimage/MovieTags.html',
+        'showimage/Movies_Tags.html',
         {
             'kind_list': kind_list,
             'area_list': area_list,

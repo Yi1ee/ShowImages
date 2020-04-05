@@ -1,6 +1,4 @@
 {% extends "showimage/base.html" %}
-
-
 {% load bootstrap3 %}
 
 
@@ -39,6 +37,10 @@
                                         <span>{{ itMovie.director }}</span>
                                     </dd>
                                     <dd>
+                                        <strong>主要演员：</strong>
+                                        <span>{{ itMovie.actors }}</span>
+                                    </dd>
+                                    <dd>
                                         <strong>上映时间：</strong>
                                         <span>{{ itMovie.releasetime }}</span>
                                     </dd>
@@ -47,8 +49,8 @@
                                         <span>{{ itMovie.types }}</span>
                                     </dd>
                                     <dd>
-                                        <strong>主要演员：</strong>
-                                        <span>{{ itMovie.actors }}</span>
+                                        <strong>制片国家/地区：</strong>
+                                        <span>{{ itMovie.location }}</span>
                                     </dd>
                                     <dt>
                                         <h4 class="mt01"><strong>剧情简介：</strong></h4>

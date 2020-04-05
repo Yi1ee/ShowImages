@@ -13,7 +13,10 @@ urlpatterns = [
 
     re_path(r'^index/(?P<index_file>.*)$', views.get_index, name='get_index'),
 
-    re_path(r'^AllMovies/$', views.AllMovies, name='AllMovies'),
+    # 通过正则表达式添加kind_id和area_id字段，从前台获取页面选择的当前项
+    re_path(r'^Movies', views.Movies_Tags, name='Movies_Tags'),
+    re_path(r'^Movies/Tags=(?P<kind_id>(\d+))&&(?P<area_id>(\d+))$', views.Movies_Tags, name='Movies_Tags'),
+
     re_path(r'^RankingList/$', views.RankingList, name='RankingList'),
     re_path(r'^get_description/(?P<img_file>.*)$', views.get_description, name='get_description'),
 
@@ -27,8 +30,6 @@ urlpatterns = [
 
     #测试路径
       
-    # 通过正则表达式添加kind_id和area_id字段，从前台获取页面选择的当前项
-    re_path(r'^MovieTags/$', views.MovieTags, name='MovieTags'),
-    re_path(r'^MovieTags/(?P<kind_id>(\d+))&&(?P<area_id>(\d+))$', views.MovieTags, name='MovieTags'),
+    
 
 ]

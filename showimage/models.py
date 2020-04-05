@@ -50,30 +50,7 @@ class MoviesForm(models.Model):
                %(self.movie_id,self.filename,self.cname,self.enname,self.releasetime,\
                 self.runtime,self.director,self.types,self.actors,self.score,self.introduction,self.location)
 
-    
 
-
-
-# 创建所有电影的模型类
-class All_movies(models.Model):
-    movie_id = models.AutoField(primary_key=True)
-    filename = models.CharField(max_length=10,null=True)
-    cname = models.CharField(max_length=30)
-    enname = models.CharField(null=True,max_length=50)
-    releasetime = models.CharField(max_length=20)
-    runtime = models.CharField(max_length=20)
-    director = models.CharField(max_length=20)
-    types = models.CharField(max_length=10)
-    actors = models.CharField(max_length=30)
-    score = models.CharField(max_length=5)
-    introduction = models.CharField(max_length=500)
-    location = models.CharField(max_length=30)
-    def __str__(self):
-        #重写直接输出类的方法
-        return "<All_movies:{movie_id=%s,filename=%s,cname=%s,enname=%s,releasetime=%s,\
-                runtime=%s,director=%s,types=%s,actors=%s,score=%s,introduction=%s,location=%s}>"\
-               %(self.movie_id,self.filename,self.cname,self.enname,self.releasetime,\
-                self.runtime,self.director,self.types,self.actors,self.score,self.introduction,self.location)
 
 # 创建高分排行榜TOP10电影的模型类
 class Top_movies(models.Model):
@@ -106,5 +83,17 @@ class Heat_movies(models.Model):
                types=%s,director=%s,actors=%s}>"\
                %(self.top_id,self.filename,self.cname,self.enname,self.releasetime,\
                 self.types,self.director,self.actors)
+
+# 创建热度排行榜TOP10电影的模型类
+class Animation_movies(models.Model):
+    top_id = models.AutoField(primary_key=True)
+    filename = models.CharField(max_length=10)
+    cname = models.CharField(max_length=30)
+    director = models.CharField(max_length=30)
+
+    def __str__(self):
+        #重写直接输出类的方法
+        return "<Animation_movies:{top_id=%s,filename=%s,cname=%s,director=%s}>"\
+               %(self.top_id,self.filename,self.cname,self.director)
 
 
