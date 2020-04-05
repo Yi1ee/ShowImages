@@ -446,23 +446,23 @@ movies tag background
 }
 .category li{
   display: inline-block;
-  margin-right: 4px;
-  padding-top: 3px;
+  margin-right: 2px;
+  padding-top: 2px;
 }
 .tag {
   zoom: 1;
   cursor: pointer;
-  padding: 2px 10px;
-  line-height: 25px;
+  padding: 2px 5px;
+  line-height: 20px;
 }
 .tag a{
-  font-size: 14px;
+  font-size: 13px;
   color: #333;
 }
 .tag_checked {
   background: #333;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 .tag_checked a{
   color: #fff;

@@ -137,7 +137,7 @@ BOOTSTRAP3 = {
     'include_jquery':True,
 }
 
-
+#添加日志输出功能
 LOGGING = {
     'version' : 1,
     'disable_existing_loggers':False,

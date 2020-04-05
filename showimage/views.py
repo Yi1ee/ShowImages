@@ -11,7 +11,8 @@ from .models import All_movies   # 导入所有电影的模型类
 from .models import Top_movies   # 导入高分排行榜电影的模型类
 from .models import Heat_movies  # 导入本月热度排行榜电影的模型类
 from .models import MoviesForm   
-from .models import Kind  
+from .models import Kind         # 导入电影类型的模型类
+from .models import Area         # 导入电影地区的模型类
 
 
 # Create your views here.
@@ -91,52 +92,54 @@ def style(request,style_file):
     return HttpResponse(style_data, content_type="text/css")
 
 
-def movies_tags(request,tag):
-    '''分类界面'''
-    movies_result={'movies':[]}
-    tag_result={'movies':[]}
-
-    all_movies_list = All_movies.objects.filter()
-    if tag == '':
-        movies_result = all_movies_list
-    else:
-        for itMovie in all_movies_list:
-            if tag in itMovie.types:
-                tag_result['movies'].append(itMovie)
-        movies_result = tag_result['movies']
-    context = {'movies_result':movies_result}
-    return render(request,'showimage/movies_tags.html',context)
-
 
 def MovieTags(request, *args, **kwargs):
-    # 给后台筛选数据库使用
-    condition = {}
+    '''全部电影界面的分类功能'''
       
-    # 初始化传递参数，若无参则代表要显示所有类型下的电影
+    # 初始化传递参数，若无传参则代表要显示全部的电影
     if not kwargs:
         kwargs = {
             'kind_id':0,
+            'area_id':0,
         }
+
+    for k, v in kwargs.items():
+        temp = int(v)
+        kwargs[k] = temp
+
     # 从kwargs中取出相应的id
     kind_id = kwargs.get('kind_id')
-    
-    # 从数据库中取出所有的type列表，因为所有类型都要在页面上显示
+    area_id = kwargs.get('area_id')
+
+    # 从数据库中取出所有的Kind和area列表，因为所有分类都要在页面上显示
     kind_list = Kind.objects.all()
+    area_list = Area.objects.all()
+
     if kind_id == 0:
-        movies_list = MoviesForm.objects.filter()
+        if area_id == 0:
+            movies_list = MoviesForm.objects.filter()
+        else:
+            area_obj = Area.objects.get(id=area_id)
+            movies_list = area_obj.movie.all()
     else:
-        kind_obj = Kind.objects.get(id=kind_id)
-        movies_list = kind_obj.movie.all()
-
-       
-        logger.error("*********************yilee*****************", movies_list)
-
+        if area_id == 0:
+            kind_obj = Kind.objects.get(id=kind_id)
+            movies_list = kind_obj.movie.all()
+        else:
+            kind_obj = Kind.objects.get(id=kind_id)
+            movies_list_kind = kind_obj.movie.all()
+            area_obj = Area.objects.get(id=area_id)
+            movies_list_area = area_obj.movie.all()
+            #返回的是两个Queryset的交集并去掉重复值，如是需要返回交集把&替换为|即可
+            movies_list = (movies_list_kind & movies_list_area).distinct()
+            logger.error("*********************yilee*****************", movies_list)
 
     return render(
         request,
         'showimage/MovieTags.html',
         {
             'kind_list': kind_list,
+            'area_list': area_list,
             'kwargs': kwargs,
             'movies_list': movies_list,
         }
