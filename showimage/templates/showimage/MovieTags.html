@@ -1,0 +1,64 @@
+{% extends "showimage/base.html " %}
+
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+<div class="pan_setting">
+    <div class="container">
+        <div>
+            <ul class="category"> 
+                <li class="tag">
+                    <a href="/MovieTags/0&&{{ kwargs.area_id }}">全部类型</a>
+                </li>
+                {% for i in kind_list %}
+                    <li class="tag">
+                        <a href="/MovieTags/{{ i.id }}&&{{ kwargs.area_id }}">{{ i.kind }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul class="category">
+                <li class="tag">
+                    <a href="/MovieTags/{{ kwargs.kind_id }}&&0">全部地区</a>
+                </li>
+                {% for j in area_list %}
+                    <li class="tag">
+                        <a href="/MovieTags/{{ kwargs.kind_id }}&&{{ j.id }}">{{ j.area }}</a>
+                    </li>
+                {% endfor %}
+            </ul><!--category-->
+        </div>
+        <div class="row row_setting">
+            {% for movie in movies_list %}
+                <div class="col-xs-2 col-md-2 col-lg-2 text_setting">
+                    <div class="thumbnail">
+                        <a href="{% url 'showimage:get_description' movie.filename %}">
+                            <img src="/img/{{ movie.filename }}">
+                            <div class="caption" style="height: 45px;">
+                                <p class="item">{{ movie.cname }} 
+                                    <strong style="color: #e09015;">{{ movie.score }}</strong>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div> 
+            {% endfor %}
+        </div><!--row-->
+    </div> <!--container-->
+
+    <script type="text/javascript">
+        $(function(){
+            $(".category").find("li").each(function(){
+                var a = $(this).find("a:first")[0];
+                if ($(a).attr("href") == location.pathname){
+                    $(this).addClass("tag_checked");
+                }else{
+                    $(this).removeClass("tag_checked");
+                }
+            });
+        });
+      </script>
+</div>
+
+{% endblock content %}
