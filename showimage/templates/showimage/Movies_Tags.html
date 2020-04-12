@@ -10,41 +10,47 @@
         <div>
             <ul class="category"> 
                 <li class="tag">
-                    <a href="/Movies/Tags=0&&{{ kwargs.area_id }}">全部类型</a>
+                    <a href="/Movies_Tags/0&&{{ kwargs.area_id }}">全部类型</a>
                 </li>
                 {% for i in kind_list %}
                     <li class="tag">
-                        <a href="/Movies/Tags={{ i.id }}&&{{ kwargs.area_id }}">{{ i.kind }}</a>
+                        <a href="/Movies_Tags/{{ i.id }}&&{{ kwargs.area_id }}">{{ i.kind }}</a>
                     </li>
                 {% endfor %}
             </ul>
             <ul class="category">
                 <li class="tag">
-                    <a href="/Movies/Tags={{ kwargs.kind_id }}&&0">全部地区</a>
+                    <a href="/Movies_Tags/{{ kwargs.kind_id }}&&0">全部地区</a>
                 </li>
                 {% for j in area_list %}
                     <li class="tag">
-                        <a href="/Movies/Tags={{ kwargs.kind_id }}&&{{ j.id }}">{{ j.area }}</a>
+                        <a href="/Movies_Tags/{{ kwargs.kind_id }}&&{{ j.id }}">{{ j.area }}</a>
                     </li>
                 {% endfor %}
             </ul><!--category-->
         </div>
-        <div class="row row_setting">
-            {% for movie in movies_list %}
-                <div class="col-xs-2 col-md-2 col-lg-2 text_setting">
-                    <div class="thumbnail">
-                        <a href="{% url 'showimage:get_description' movie.filename %}">
-                            <img src="/img/{{ movie.filename }}">
-                            <div class="caption" style="height: 45px;">
-                                <p class="item">{{ movie.cname }} 
-                                    <strong style="color: #e09015;">{{ movie.score }}</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </div> 
-            {% endfor %}
-        </div><!--row-->
+        {% if movies_list %}
+            <div class="row row_setting">
+                {% for movie in movies_list %}
+                    <div class="col-xs-2 col-md-2 col-lg-2 text_setting">
+                        <div class="thumbnail">
+                            <a href="{% url 'showimage:get_description' movie.filename %}">
+                                <img src="/img/{{ movie.filename }}">
+                                <div class="caption" style="height: 45px;">
+                                    <p class="item">{{ movie.cname }} 
+                                        <strong style="color: #e09015;">{{ movie.score }}</strong>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div> 
+                {% endfor %}
+            </div><!--row-->
+        {% else %}
+        <div class="upset">
+            <p class="mt13">抱歉小主，没有这方面的相关内容</p>    
+        </div>
+        {% endif %}
     </div> <!--container-->
     <div id="backtotop">
         <div class="top"><span title="back to top"></span></div>

@@ -495,3 +495,20 @@ movies tag background
 .tag_checked a:hover{
   color: #fff;
 }
+.upset{
+  width: 800px;
+  height: 500px;
+  background-image: url(upset.jpg);
+  background-size: 220px;
+  background-repeat: no-repeat;
+  background-position-x: 40%;
+  background-position-y:20%;
+  position: relative;
+  
+} 
+.upset p{
+  font-size: 18px;
+  line-height: 32px;
+  padding: 200px 0 0 450px;
+  color: #333;
+}
