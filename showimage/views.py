@@ -4,6 +4,7 @@ from django.contrib import messages
 import os
 import json
 import logging
+from django.db.models import Q
 
 logger = logging.getLogger("django")
 
@@ -11,68 +12,18 @@ from .models import Top_movies   # 导入高分排行榜电影的模型类
 from .models import Heat_movies  # 导入本月热度排行榜电影的模型类
 from .models import Animation_movies  # 导入动画电影排行榜电影的模型类
 
-from .models import MoviesForm   
+from .models import MoviesForm   # 导入包含分类标签的全部电影的模型类
 from .models import Kind         # 导入电影类型的模型类
 from .models import Area         # 导入电影地区的模型类
-
+from .models import Ranking_movies
 
 # Create your views here.
 
 imagespath = "C:\\project\\ShowImages\\static_files\\poster_images"
 stylespath = "C:\\project\\ShowImages\\static_files\\CSS"
-description_path="C:\\project\\ShowImages\\static_files\\description_files"
-resultfile =description_path + "\\" + 'result.json'
 index_path="C:\\project\\ShowImages\\static_files\\index_files"
 
 
-def index(request):
-    '''显示界面主页'''
-    return render(request,'showimage/index.html')
-
-def about(request):
-    '''显示about界面'''
-    return render(request,'showimage/about.html')
-
-def RankingList(request):
-    top_movies_list = Top_movies.objects.filter()
-    heat_movies_list = Heat_movies.objects.filter()
-    animation_movies_list = Animation_movies.objects.filter()
-    context= {'top_movies_list':top_movies_list,'heat_movies_list':heat_movies_list,'animation_movies_list':animation_movies_list}
-    return render(request,'showimage/RankingList.html',context)
-
-def get_description(request, img_file):
-    '''返回点击某个特定电影后的对该电影更为具体描述的界面'''
-    movies_list = MoviesForm.objects.filter()
-    for itMovie in movies_list:
-        if itMovie.filename == img_file:
-            '''电影海报唯一，根据文件定位特定内容'''
-            context = {'itMovie':itMovie}
-    if context == None:
-        raise Http404
-    return render(request,'showimage/get_description.html',context)
-
-def search(request):
-    q=request.GET.get('q')
-    #content = get_Jsonfile()
-    all_movies_list = MoviesForm.objects.filter()
-
-    search_result={'movies':[]}
-    #创建一个新的JSON对象result存储搜索结果
-    for itMovie in all_movies_list:
-        if q in itMovie.cname:
-            search_result['movies'].append(itMovie)
-    movies_result=search_result['movies']
-    context = {'movies_result':movies_result}
-    return render(request,'showimage/result.html',context)
-
-
-
-def get_index(request,index_file):
-    '''获取首页轮播海报图片'''
-    filepath =index_path + "\\"+ index_file
-    with open(filepath, 'rb') as f:
-        index_data = f.read()
-    return HttpResponse(index_data, content_type="image/jpg")
 
 def img(request,img_file):
     '''获取某一特定电影的海报图片'''
@@ -87,6 +38,75 @@ def style(request,style_file):
     with open(stylepath, 'rb') as f:
             style_data = f.read()
     return HttpResponse(style_data, content_type="text/css")
+
+
+def index(request):
+    '''显示界面主页'''
+    return render(request,'showimage/index.html')
+
+def get_index(request,index_file):
+    '''获取首页轮播海报图片'''
+    filepath =index_path + "\\"+ index_file
+    with open(filepath, 'rb') as f:
+        index_data = f.read()
+    return HttpResponse(index_data, content_type="image/jpg")
+
+
+def about(request):
+    '''显示about界面'''
+    return render(request,'showimage/about.html')
+
+
+def RankingList(request):
+    # 获取高分电影TOP榜
+    top_movies_list = Top_movies.objects.filter()
+    # heat_movies_list = Heat_movies.objects.filter()
+    # animation_movies_list = Animation_movies.objects.filter()
+    movies_list = Ranking_movies.objects.filter()
+    # 获取热度电影TOP10
+    heat_movies_list = movies_list[:10]
+    # 获取动画电影TOP10
+    animation_movies_list = movies_list[10:20]
+    context= {'top_movies_list':top_movies_list,'heat_movies_list':heat_movies_list,'animation_movies_list':animation_movies_list}
+    return render(request,'showimage/RankingList.html',context)
+
+
+def get_description(request, img_file):
+    '''返回点击某个特定电影后的对该电影更为具体描述的界面'''
+    # all_movies_list = MoviesForm.objects.filter()
+    # for itMovie in all_movies_list:
+    #     if itMovie.filename == img_file:
+    #         '''电影海报唯一，根据文件定位特定内容'''
+    #         context = {'itMovie':itMovie}
+    # 电影描述除了全部电影外还需要加入榜单里面的电影，所以需要更改查找方式
+    all_movies_list = MoviesForm.objects.filter(filename__exact = img_file)
+    if all_movies_list.exists():
+        itMovie = all_movies_list[0]
+    else :
+        ranking_movies_list = Ranking_movies.objects.filter(filename__exact = img_file)
+        itMovie = ranking_movies_list[0]
+
+    context = {'itMovie':itMovie}
+    if context == None:
+        raise Http404
+    return render(request,'showimage/get_description.html',context)
+
+def search(request):
+    q=request.GET.get('q')
+    # all_movies_list = MoviesForm.objects.filter()
+    movies_list = MoviesForm.objects.filter(Q(cname__contains = q)|Q(actors__contains = q)|Q(director__contains = q))
+    actors_list = MoviesForm.objects.filter(actors__contains = q)
+    director_list = MoviesForm.objects.filter(director__contains = q)
+    # search_result={'movies':[]}
+    # 创建一个新的JSON对象result存储搜索结果
+    # for itMovie in all_movies_list:
+    #     if q in itMovie.cname:
+    #         search_result['movies'].append(itMovie)
+    # movies_result=search_result['movies']
+    # context = {'movies_result':movies_result}
+    logger.error("*********************yilee*****************", actors_list  )
+    context = {'movies_list':movies_list,"actors_list":actors_list,"director_list":director_list,"q":q}
+    return render(request,'showimage/result.html',context)
 
 
 
@@ -126,7 +146,7 @@ def Movies_Tags(request, *args, **kwargs):
             movies_list_kind = kind_obj.movie.all()
             area_obj = Area.objects.get(id=area_id)
             movies_list_area = area_obj.movie.all()
-            #返回的是两个Queryset的交集并去掉重复值，如是需要返回交集把&替换为|即可
+            #返回的是两个Queryset的交集并去掉重复值，如是需要返回并集把&替换为|即可
             movies_list = (movies_list_kind & movies_list_area).distinct()
             #logger.error("*********************yilee*****************", movies_list)
 

@@ -4,30 +4,130 @@
 
 
 {% block content %}
-
-<div class="container pan_setting">
-    {% if movies_result %}
-        <div class="row row_setting">
-            {% for movie in movies_result %}
-                <div class="col-xs-2 col-md-2 col-lg-2 text_setting">
-                    <div class="thumbnail">
-                        <a href="{% url 'showimage:get_description' movie.filename %}">
-                            <img src="/img/{{ movie.filename }}">
-                            <div class="caption" style="height: 45px;">
-                                <p class="item">{{ movie.cname }} 
-                                    <storng style="color: #e09015;">{{ movie.score }}</storng>
-                                </p>
-                            </div>
-                        </a>
+    <div class="db_bodyout">
+        <div class="db_bodybg">
+            <div class="db_topcont">
+                <div class="search_q">
+                    <p>有关"<nobr>{{ q }}</nobr>"的搜索结果：</p>
+                </div>
+                <div class="search_tab">
+                    <span class="search_more">
+                        <a href="/Movies_Tags/0&&0">分类查询<i>&gt;</i></a>
+                    </span>
+                    <ul class="search_menu">
+                        <li class="search_curr" onclick="JavaScript:ChangeDiv('0','type_',2)">电影相关</li>
+                        <li onclick="JavaScript:ChangeDiv('1','type_',2)">演员相关</li>
+                        <li onclick="JavaScript:ChangeDiv('2','type_',2)">导演相关</li>
+                    </ul>
+                </div>
+                <div>
+                </div>
+                <div id="type_0" >
+                    <div class="search_con">
+                        <div class="data_top">
+                            <ul>
+                                {% if movies_list %}
+                                    {% for movie in movies_list %}
+                                    <li>
+                                        <div class="table"  style="margin-bottom: 5px;"> 
+                                            <div class="t_r"> 
+                                                <a href="{% url 'showimage:get_description' movie.filename %}"> 
+                                                    <div class="td"> 
+                                                            <img width="90" height="120" class="img_box" src="/img/{{ movie.filename }}">
+                                                    </div> 
+                                                </a>
+                                                <div  class="td"> 
+                                                    <p><nobr class="at0" >{{ movie.cname }}</nobr> / {{ movie.enname }}</p>
+                                                    <p class="al0">类型：{{ movie.types }}</p>
+                                                    <p class="al0">导演：{{ movie.director }}</p>
+                                                    <p class="al0">主演：{{ movie.actors }}</p>
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="upset">
+                                        <p class="mt13">抱歉小主，没有这方面的相关内容</p>    
+                                    </div>
+                                {% endif %}
+                            </ul>
+                        </div><!--data_top-->
                     </div>
-                </div>    
-            {% endfor %}
+                </div>
+                <div id="type_1" style="display:none;">
+                    <div class="hottoper">
+                        <dl >
+                            <ul class="clearfix">
+                                {% if actors_list %}
+                                    {% for movie in actors_list %}
+                                    <li>
+                                        <a href="{% url 'showimage:get_description' movie.filename %}">
+                                            <img src="/img/{{ movie.filename }}" style="width: 140px;height: 190px;">
+                                            <div class="caption" style="height: 45px;">
+                                                <p class="mt10">{{ movie.cname }}</p> 
+                                                <p class="mt11">演员:<span>{{ movie.actors }}</span></p> 
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="upset">
+                                        <p class="mt13">抱歉小主，没有这方面的相关内容</p>    
+                                    </div>
+                                {% endif %}
+                            </ul>
+                        </dl>
+                    </div><!--hottoper-->
+                </div>
+                <div id="type_2" style="display:none;">
+                    <div class="hottoper">
+                        <dl >
+                            <ul class="clearfix">
+                                {% if director_list %}
+                                    {% for movie in director_list %}
+                                    <li>
+                                        <a href="{% url 'showimage:get_description' movie.filename %}">
+                                            <img src="/img/{{ movie.filename }}" style="width: 140px;height: 190px;">
+                                            <div class="caption" style="height: 45px;">
+                                                <p class="mt10">{{ movie.cname }}</p> 
+                                                <p class="mt11">导演:<span>{{ movie.director }}</span></p> 
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                {% else %}
+                                    <div class="upset">
+                                        <p class="mt13">抱歉小主，没有这方面的相关内容</p>    
+                                    </div>
+                                {% endif %}
+                            </ul>
+                        </dl>
+                    </div><!--hottoper-->
+                </div>
+            </div>
         </div>
-    {% else %}
-        <div>
-            <h4>很抱歉，未能找到相关内容。</h4>
-        </div>
-    {% endif %}
-</div>
+    </div>
+
+    <script language="JavaScript" type="text/javascript"> 
+        function ChangeDiv(divId,divName,zDivCount){ 
+            for(i=0;i<=zDivCount;i++) 
+            { 
+                document.getElementById(divName+i).style.display="none"; 
+                //将所有的层都隐藏 
+            } 
+            document.getElementById(divName+divId).style.display="block"; 
+            //显示当前层 
+        }
+    </script> 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('ul li').click(function(){
+                $(this).siblings().removeClass('search_curr');
+                $(this).addClass('search_curr');
+            })
+        })
+    </script>
 
 {% endblock content %}
+

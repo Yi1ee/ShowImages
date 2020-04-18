@@ -19,16 +19,15 @@
                                 {% for movie in heat_movies_list %}
                                 <li>
                                     <a href="{% url 'showimage:get_description' movie.filename %}">
-                                        <img src="/img/{{ movie.filename }}" >
+                                        <img src="/img/{{ movie.filename }}" style="width: 140px;height: 190px;">
                                         <div class="caption" style="height: 45px;">
                                             <p class="mt10">{{ movie.cname }}</p> 
                                             <p class="mt11">主演:<span>{{ movie.actors }}</span></p> 
                                         </div>
                                     </a>
                                 </li>
-                                    {% endfor %}
+                                {% endfor %}
                             </ul>
-                            
                         </dd>
                         <dd>
                             <a href="/Movies_Tags/0&&0" class="mt12">更多内容>></a>
@@ -49,16 +48,15 @@
                                 {% for movie in animation_movies_list %}
                                 <li>
                                     <a href="{% url 'showimage:get_description' movie.filename %}">
-                                        <img src="/img/{{ movie.filename }}" >
+                                        <img src="/img/{{ movie.filename }}" style="width: 140px;height: 190px;">
                                         <div class="caption" style="height: 45px;">
                                             <p class="mt10">{{ movie.cname }}</p> 
                                             <p class="mt11">导演:<span>{{ movie.director }}</span></p> 
                                         </div>
                                     </a>
                                 </li>
-                                    {% endfor %}
+                                {% endfor %}
                             </ul>
-                            
                         </dd>
                         <dd>
                             <a href="/Movies_Tags/0&&0" class="mt12">更多内容>></a>
@@ -134,19 +132,6 @@
             </div><!--#backtotop-->
         </div><!--container-->
     </div><!--pan_setting-->
-
-    <script type="text/javascript">
-        $(function(){
-            $(".Ranging_kind").find("li").each(function(){
-                var a = $(this).find("a:first")[0];
-                if ($(a).attr("href") == location.pathname){
-                    $(this).addClass("listkind_checked");
-                }else{
-                    $(this).removeClass("listkind_checked");
-                }
-            });
-        });
-    </script>
 
     <footer class="footer">
         <div class="container">

@@ -71,18 +71,13 @@ class Heat_movies(models.Model):
     top_id = models.AutoField(primary_key=True)
     filename = models.CharField(max_length=10,null=True)
     cname = models.CharField(max_length=30)
-    enname = models.CharField(null=True,max_length=50)
-    releasetime = models.CharField(max_length=20)
-    types = models.CharField(max_length=10)
     director = models.CharField(max_length=20)
     actors = models.CharField(max_length=30)
 
     def __str__(self):
         #重写直接输出类的方法
-        return "<Heat_movies:{top_id=%s,filename=%s,cname=%s,enname=%s,releasetime=%s,\
-               types=%s,director=%s,actors=%s}>"\
-               %(self.top_id,self.filename,self.cname,self.enname,self.releasetime,\
-                self.types,self.director,self.actors)
+        return "<Heat_movies:{top_id=%s,filename=%s,cname=%s,director=%s,actors=%s}>"\
+               %(self.top_id,self.filename,self.cname,self.director,self.actors)
 
 # 创建热度排行榜TOP10电影的模型类
 class Animation_movies(models.Model):
@@ -90,10 +85,37 @@ class Animation_movies(models.Model):
     filename = models.CharField(max_length=10)
     cname = models.CharField(max_length=30)
     director = models.CharField(max_length=30)
+    actors = models.CharField(max_length=30,null=True)
 
     def __str__(self):
         #重写直接输出类的方法
-        return "<Animation_movies:{top_id=%s,filename=%s,cname=%s,director=%s}>"\
-               %(self.top_id,self.filename,self.cname,self.director)
+        return "<Animation_movies:{top_id=%s,filename=%s,cname=%s,director=%s,actors=%s}>"\
+               %(self.top_id,self.filename,self.cname,self.director,self.actors)
 
+
+# 创建排行榜电影TOP10的模型类，将所有的排行榜中的电影放在一一个表中
+class Ranking_movies(models.Model):
+    id = models.AutoField(primary_key=True)
+    top_id = models.IntegerField()
+    filename = models.CharField(max_length=10)
+    cname = models.CharField(max_length=30)
+    director = models.CharField(max_length=30)
+    actors = models.CharField(max_length=50,null=True)
+    enname = models.CharField(max_length=50,null=True)
+    releasetime = models.CharField(max_length=20,null=True)
+    runtime = models.CharField(max_length=20,null=True)
+    types = models.CharField(max_length=10,null=True)
+    score = models.CharField(max_length=5,null=True)
+    introduction = models.CharField(max_length=500,null=True)
+    location = models.CharField(max_length=30,null=True)
+
+    class Meta:
+        db_table = 'Ranking_movies'
+
+def __str__(self):
+        #重写直接输出类的方法
+        return "<Ranking_movies:{top_id=%s,filename=%s,cname=%s,enname=%s,releasetime=%s,\
+                runtime=%s,director=%s,types=%s,actors=%s,score=%s,introduction=%s,location=%s}>"\
+               %(self.movie_id,self.filename,self.cname,self.enname,self.releasetime,\
+                self.runtime,self.director,self.types,self.actors,self.score,self.introduction,self.location)
 
