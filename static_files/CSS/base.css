@@ -65,6 +65,45 @@ body a:focus {
   border-bottom: 5px solid;
   border-left: 5px solid transparent;
 }
+/* 
+  navbar seaech form 
+*/
+.form_group{
+  float: right;
+  position: relative;
+}
+.form_search{
+  display: inline-block;
+  height: 34px;
+  line-height: 1.2;
+  width: 220px;
+  padding: 0 40px 0 20px;
+  border: 1px solid #c8deec;
+  box-shadow: 0 0 3px #c8deec;
+  box-shadow: 0 0 30px 50px #fff inset;
+  font-size: 14px;
+  border-radius: 30px;
+  overflow: hidden;
+  color: #333;
+  outline: none;
+}
+
+.submit {
+  background-image: url(searchend.png);
+  background-position: -70px -102px;
+  position: absolute;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  left: 180px;
+  top: 1px;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+  background-color: #fff;
+}
+
 
 /*
  * Footer
@@ -336,7 +375,7 @@ Ranging kind
 }
 .hottoper li {
   display: inline;
-  width: 150px;
+  width: 155px;
   height: 260px;
   background-color: transparent;
   box-shadow:0px 0px 5px 5px #f7f5f5;
@@ -571,4 +610,6 @@ result background
 .search_q nobr{
   color: brown; 
   font-weight: bolder;
+  font-size: 16px;
 }
+
