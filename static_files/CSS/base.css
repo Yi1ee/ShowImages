@@ -211,8 +211,8 @@ back to top
 }
 .db_coverinner {
   position: absolute;
-  left: 15px;
-  top: 15px;
+  left: 30px;
+  top: 20px;
 }
 .db_coverpicbox {
   display: block;
@@ -227,7 +227,7 @@ back to top
 .db_ihead {
   position: absolute;
   width: 600px;
-  left: 350px;
+  left: 370px;
   zoom: 1;
 }
 .db_head {
@@ -272,7 +272,7 @@ back to top
   padding-bottom: 15px;
   font-size: 14px;
   padding-top: 180px;
-  padding-left: 350px;
+  padding-left: 370px;
   z-index: 0;
   zoom: 1;
 }
@@ -288,7 +288,7 @@ back to top
 .info{
   float: left;
   display: inline;
-  width: 407px;
+  width: 440px;
   margin-left: 5px;
 }
 .info dd {
@@ -595,9 +595,6 @@ result background
   cursor: pointer;
 
 }
-/* .search_menu li.search_curr {
-  border-bottom: 4px solid #524646;
-} */
 .search_menu li.search_curr {
   background:#464545;
   text-decoration: none;
@@ -613,3 +610,103 @@ result background
   font-size: 16px;
 }
 
+
+/*
+    Recommended daily background
+*/
+.todayrecmd {
+  background: #fff;
+  position: relative;
+  width: 130%;
+  zoom:1;
+  z-index: 1;
+}
+.todayrecmd_wrap {
+  background: #fff;
+  width: 900px;
+  height:400px;
+  box-shadow: 0 -10px 15px -10px #525252;
+  position: absolute;
+  z-index:20;
+  top: 100px;
+  left: 10%;
+  margin: 0 auto;
+  zoom:1;
+}
+.todayrecmd_img {
+  position: absolute;
+  left: 50px;
+  top: 30px;
+}
+.todayrecmd_picbox {
+  display: block;
+  width:300px;
+  height:400px;
+  border-radius:15px;
+  background-color: transparent;
+  box-shadow:0px 0px 5px 5px #ccc;
+  padding: 10px;
+  z-index: 30;
+}
+.todayrecmd_head{
+  font-size: 30px;
+  font-weight: bolder;
+}
+.todayrecmd_head nobr{
+  font-size: 24px;
+  font-weight: bold;
+}
+.todayrecmd_date{
+  font-size: 18px;
+  float: right;
+  padding-top: 300px;
+  color: #696868;
+}
+
+
+
+.todayrecmd_content {
+  position: absolute;
+  padding-bottom: 15px;
+  font-size: 14px;
+  padding-top: 10px;
+  padding-left: 350px;
+  z-index: 0;
+  zoom: 1;
+}
+.todayrecmd_info {
+  width: 500px;
+  margin: 0 auto;
+  position: absolute;
+  padding-top: 30px;
+  padding-bottom: 25px;
+}
+.clearfix{
+  display: block;
+}
+.todayrecmd_otherbox {
+  position: absolute;
+  padding-bottom: 15px;
+  font-size: 14px;
+  padding-top: 25px;
+  padding-left: 5px;
+  z-index: 0;
+  zoom: 1;
+  width: 450px;
+}
+.todayrecmd_otherbox dd {
+  border-bottom: 1px dotted #999;
+  position: relative;
+  padding: 9px 0 9px 120px;
+  line-height: 1.5em;;
+  font-size: 13px;
+  zoom: 1;
+}
+.todayrecmd_otherbox dd strong {
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 120px;
+  font-size: 14px;
+  line-height: 1.5em;
+}

@@ -1,0 +1,58 @@
+{% extends "showimage/base.html " %}
+
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+    <div class="todayrecmd">
+        <div class="todayrecmd_wrap">
+            <div class="todayrecmd_img">
+                <div class="img-rounded">
+                    <a href="{% url 'showimage:get_description' itMovie.filename %}">
+                        <img src="/img/{{ itMovie.filename }}" >
+                    </a> 
+                </div>
+            </div>
+
+            <div class="todayrecmd_content">
+                <div class="todayrecmd_info">
+                    <div class="clearfix">
+                        <span class="todayrecmd_head">{{ itMovie.cname }}<nobr>({{ itMovie.enname }})</span>
+                        <div class="todayrecmd_otherbox">
+                            <dl>
+                                <dd>
+                                    <strong>导演：</strong>
+                                    <span>{{ itMovie.director }}</span>
+                                </dd>
+                                <dd>
+                                    <strong>主要演员：</strong>
+                                    <span>{{ itMovie.actors }}</span>
+                                </dd>
+                                <dd>
+                                    <strong>上映时间：</strong>
+                                    <span>{{ itMovie.releasetime }}</span>
+                                </dd>
+                                <dd>
+                                    <strong>类型：</strong>
+                                    <span>{{ itMovie.types }}</span>
+                                </dd>
+                                <dd>
+                                    <strong>电影时长：</strong>
+                                    <span>{{ itMovie.runtime }}</span>
+                                </dd>
+                                <dd>
+                                    <strong>制片国家/地区：</strong>
+                                    <span>{{ itMovie.location }}</span>
+                                </dd>
+                            </dl>
+                        </div>
+                        <p class="todayrecmd_date">------{{year}}年{{month}}月{{day}}日推荐</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+{% endblock content %}
+
