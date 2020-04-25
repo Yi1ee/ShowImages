@@ -28,7 +28,8 @@ urlpatterns = [
     # re_path(r'^Jokerdescribe/$', views.Jokerdescribe, name='Jokerdescribe'),
 
     #测试路径
-      
+    re_path(r'^recommend/$', views.recommend, name='recommend'),
+
     
 
 ]
