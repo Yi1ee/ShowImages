@@ -9,16 +9,15 @@
         <div class="todayrecmd_wrap">
             <div class="todayrecmd_img">
                 <div class="img-rounded">
-                    <a href="{% url 'showimage:get_description' itMovie.filename %}">
-                        <img src="/img/{{ itMovie.filename }}" >
-                    </a> 
+                    <img src="/img/{{ itMovie.filename }}" >
                 </div>
             </div>
 
             <div class="todayrecmd_content">
                 <div class="todayrecmd_info">
                     <div class="clearfix">
-                        <span class="todayrecmd_head">{{ itMovie.cname }}<nobr>({{ itMovie.enname }})</span>
+                        <span class="todayrecmd_CNhead">{{ itMovie.cname }}</span>
+                        <span class="todayrecmd_ENhead">({{ itMovie.enname }})</span>
                         <div class="todayrecmd_otherbox">
                             <dl>
                                 <dd>
@@ -47,7 +46,7 @@
                                 </dd>
                             </dl>
                         </div>
-                        <p class="todayrecmd_date">------{{year}}年{{month}}月{{day}}日推荐</p>
+                        <p class="todayrecmd_date">------{{year}}年{{month}}月{{day}}日啵唧推荐</p>
                     </div>
                 </div>
             </div>

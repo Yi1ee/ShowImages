@@ -489,14 +489,7 @@ Ranking right background
   margin-top: 6px;
   text-align: right;
 }
-.at0{
-  color: #0d2e47;
-  font-size: 18px;
-}
-.al0{
-  font-size: 12px;
-  color: #555;
-}
+
 
 /*
 movies tag background 
@@ -537,11 +530,11 @@ movies tag background
 }
 .upset{
   width: 800px;
-  height: 500px;
+  height: 300px;
   background-image: url(upset.jpg);
   background-size: 220px;
   background-repeat: no-repeat;
-  background-position-x: 40%;
+  background-position-x: 35%;
   background-position-y:20%;
   position: relative;
   
@@ -549,7 +542,7 @@ movies tag background
 .upset p{
   font-size: 18px;
   line-height: 32px;
-  padding: 200px 0 0 450px;
+  padding: 200px 0 0 400px;
   color: #333;
 }
 
@@ -562,7 +555,7 @@ result background
 }
 .search_tab{
     height: 50px;
-    border-bottom: 2px solid #dedede;
+    border-bottom: 1px solid #f07200;
     padding: 10px 25px 0;
     position: relative;
     zoom: 1;
@@ -593,7 +586,6 @@ result background
   line-height: 35px;
   margin: -45px 0 20px 20px;
   cursor: pointer;
-
 }
 .search_menu li.search_curr {
   background:#464545;
@@ -607,15 +599,28 @@ result background
 .search_q nobr{
   color: brown; 
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 18px;
+}
+.at0{
+  font-size: 18px;
+  padding-top: 15px;
+}
+.at1{
+  color: #555;
+  font-size: 14px;
+}
+.al0{
+  font-size: 12px;
+  color: #555;
 }
 
-
 /*
-    Recommended daily background
+
+  Recommended daily background
+
 */
 .todayrecmd {
-  background: #fff;
+  background: #ffffff;
   position: relative;
   width: 130%;
   zoom:1;
@@ -624,7 +629,7 @@ result background
 .todayrecmd_wrap {
   background: #fff;
   width: 900px;
-  height:400px;
+  height:450px;
   box-shadow: 0 -10px 15px -10px #525252;
   position: absolute;
   z-index:20;
@@ -648,23 +653,6 @@ result background
   padding: 10px;
   z-index: 30;
 }
-.todayrecmd_head{
-  font-size: 30px;
-  font-weight: bolder;
-}
-.todayrecmd_head nobr{
-  font-size: 24px;
-  font-weight: bold;
-}
-.todayrecmd_date{
-  font-size: 18px;
-  float: right;
-  padding-top: 300px;
-  color: #696868;
-}
-
-
-
 .todayrecmd_content {
   position: absolute;
   padding-bottom: 15px;
@@ -675,7 +663,7 @@ result background
   zoom: 1;
 }
 .todayrecmd_info {
-  width: 500px;
+  width: 480px;
   margin: 0 auto;
   position: absolute;
   padding-top: 30px;
@@ -709,4 +697,32 @@ result background
   width: 120px;
   font-size: 14px;
   line-height: 1.5em;
+}
+.todayrecmd_CNhead{
+  font-size: 30px;
+  font-weight: bolder;
+}
+.todayrecmd_ENhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.todayrecmd_date{
+  font-size: 16px;
+  float: right;
+  padding-top: 300px;
+  color: #f07200;
+  font-weight: bolder;
+}
+
+/* 
+
+  video play background
+
+*/
+.myModal-content{
+  width: 642px;
+  background-color:rgb(255, 255, 255);
+}
+#videodemo:focus{ 
+  outline:none   
 }

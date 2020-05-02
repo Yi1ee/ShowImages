@@ -29,6 +29,9 @@ urlpatterns = [
 
     #测试路径
     re_path(r'^recommend/$', views.recommend, name='recommend'),
+    re_path(r'^mp4/(?P<mp4_file>.*)$', views.mp4, name='mp4'),
+    re_path(r'^video_resp/$', views.stream_video, name='stream_video'),
+    re_path(r'^video/$', views.video, name='video'),
 
     
 

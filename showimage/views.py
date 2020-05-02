@@ -1,13 +1,17 @@
 from django.shortcuts import render     # 可以用来返回我们渲染的html文件
 from django.http import HttpResponse,Http404        # 可以返回渲染的页面
 from django.contrib import messages
-from django.utils import timezone   #引入timezone模块
-from datetime import datetime
+from datetime import datetime   #获取系统时间模块
+
+from wsgiref.util import FileWrapper
+from django.http import StreamingHttpResponse
+import re
+import mimetypes
 
 import os
 import json
-import logging
-import random
+import logging   #日志
+import random  #导入随机函数
 from django.db.models import Q   # Queryset结果   
 
 logger = logging.getLogger("django")
@@ -26,6 +30,7 @@ from .models import Ranking_movies
 imagespath = "C:\\project\\ShowImages\\static_files\\poster_images"
 stylespath = "C:\\project\\ShowImages\\static_files\\CSS"
 index_path="C:\\project\\ShowImages\\static_files\\index_files"
+MP4s_path = "C:\\project\\ShowImages\\static_files\\video"
 
 
 
@@ -42,6 +47,9 @@ def style(request,style_file):
     with open(stylepath, 'rb') as f:
             style_data = f.read()
     return HttpResponse(style_data, content_type="text/css")
+
+
+
 
 
 def index(request):
@@ -190,3 +198,55 @@ def recommend(request):
             'itMovie':itMovie,
         }
     )
+
+
+def mp4(request,mp4_file):
+    '''获取特定视频'''
+    mp4_path =MP4s_path + "\\"+ mp4_file
+    with open(mp4_path, 'rb') as f:
+            mp4_data = f.read()
+    return HttpResponse(mp4_data, content_type="video/mp4")
+
+
+def video(request):
+    return render(request,'showimage/video.html')
+
+
+def file_iterator(file_name, chunk_size=8192, offset=0, length=None):
+    with open(file_name, "rb") as f:
+        f.seek(offset, os.SEEK_SET)
+        remaining = length
+        while True:
+            bytes_length = chunk_size if remaining is None else min(remaining, chunk_size)
+            data = f.read(bytes_length)
+            if not data:
+                break
+            if remaining:
+                remaining -= len(data)
+            yield data
+
+
+def stream_video(request):
+    """将视频文件以流媒体的方式响应"""
+    range_header = request.META.get('HTTP_RANGE', '').strip()
+    range_re = re.compile(r'bytes\s*=\s*(\d+)\s*-\s*(\d*)', re.I)
+    range_match = range_re.match(range_header)
+    path = request.GET.get('path')
+    size = os.path.getsize(path)
+    content_type, encoding = mimetypes.guess_type(path)
+    content_type = content_type or 'application/octet-stream'
+    if range_match:
+        first_byte, last_byte = range_match.groups()
+        first_byte = int(first_byte) if first_byte else 0
+        last_byte = first_byte + 1024 * 1024 * 10
+        if last_byte >= size:
+            last_byte = size - 1
+        length = last_byte - first_byte + 1
+        resp = StreamingHttpResponse(file_iterator(path, offset=first_byte, length=length), status=206, content_type=content_type)
+        resp['Content-Length'] = str(length)
+        resp['Content-Range'] = 'bytes %s-%s/%s' % (first_byte, last_byte, size)
+    else:
+        resp = StreamingHttpResponse(FileWrapper(open(path, 'rb')), content_type=content_type)
+        resp['Content-Length'] = str(size)
+    resp['Accept-Ranges'] = 'bytes'
+    return resp
