@@ -30,7 +30,6 @@ from .models import Ranking_movies
 imagespath = "C:\\project\\ShowImages\\static_files\\poster_images"
 stylespath = "C:\\project\\ShowImages\\static_files\\CSS"
 index_path="C:\\project\\ShowImages\\static_files\\index_files"
-MP4s_path = "C:\\project\\ShowImages\\static_files\\video"
 
 
 
@@ -47,9 +46,6 @@ def style(request,style_file):
     with open(stylepath, 'rb') as f:
             style_data = f.read()
     return HttpResponse(style_data, content_type="text/css")
-
-
-
 
 
 def index(request):
@@ -200,17 +196,8 @@ def recommend(request):
     )
 
 
-def mp4(request,mp4_file):
-    '''获取特定视频'''
-    mp4_path =MP4s_path + "\\"+ mp4_file
-    with open(mp4_path, 'rb') as f:
-            mp4_data = f.read()
-    return HttpResponse(mp4_data, content_type="video/mp4")
-
-
 def video(request):
     return render(request,'showimage/video.html')
-
 
 def file_iterator(file_name, chunk_size=8192, offset=0, length=None):
     with open(file_name, "rb") as f:
@@ -224,7 +211,6 @@ def file_iterator(file_name, chunk_size=8192, offset=0, length=None):
             if remaining:
                 remaining -= len(data)
             yield data
-
 
 def stream_video(request):
     """将视频文件以流媒体的方式响应"""
@@ -250,3 +236,6 @@ def stream_video(request):
         resp['Content-Length'] = str(size)
     resp['Accept-Ranges'] = 'bytes'
     return resp
+
+def test(request):
+    return render(request,'showimage/test.html')

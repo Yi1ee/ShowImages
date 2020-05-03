@@ -4,7 +4,6 @@
 
 
 {% block content %}
-
     <div class="todayrecmd">
         <div class="todayrecmd_wrap">
             <div class="todayrecmd_img">
@@ -52,6 +51,54 @@
             </div>
         </div>
     </div>
-   
+    <div class="tooltip-options">
+        <a href="#" data-toggle="modal" data-target="#Vadio">
+            <div class="cat" data-toggle="tooltip"  title="Boji's favorite movie clip will play if you click" data-placement="bottom"></div>
+        </a>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" id="Vadio" tabindex="-1" role="dialog" aria-labelledby="videoPlayModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" class="myModal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <p class="modal-title" id="myModalLabel" style="font-weight: bolder;text-align: center;">这个杀手不太冷(Léon)</p>
+                    <!-- <a class="close" data-dismiss="modal" style="position:absolute; top:5px; right:5px;">×</a> -->
+                </div>
+                <div id="filelist">
+                    <video id="videodemo" class="video_link" style="width:100%;height:100%;object-fit:fill" controls>
+                        <source src="/video_resp/?path=static_files/video/Leon.mp4" type="video/mp4">
+                        您的浏览器不支持Video标签
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        // 当模态框完全对用户隐藏时触发：暂停事件
+        $(function () {
+            $("#Vadio").on('hidden.bs.modal', function () {
+                var vadiodom = document.getElementById("videodemo");
+                vadiodom.controls = true;
+                if (!vadiodom.paused) {
+                    vadiodom.pause();
+                }
+            });
+        });
+        // 实现模态框在界面内水平垂直居中
+        $('#Vadio').on('shown.bs.modal', function () {
+            // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+            $(this).css('display', 'block');
+            var modalHeight=$(window).height() / 2 - $('#Vadio .modal-dialog').height() / 2;
+            $(this).find('.modal-dialog').css({
+                'margin-top': modalHeight
+            });
+        });
+    </script>
+
+    <script>
+        $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    </script>
 {% endblock content %}
 

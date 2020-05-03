@@ -144,6 +144,27 @@ body a:focus {
   height: 360px;
 }
 
+/* index welcome */
+
+.welcome{
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+/* 设置轮播图指针大小 */
+ol.carousel-indicators li {
+  width: 8px;
+  height: 8px;
+}
+ol.carousel-indicators li.active {
+  width: 10px;
+  height: 10px;
+}
+div.carousel-caption p {
+  font-size: 16px;
+  font-weight: bolder;
+}
+
 
 /*
 back to top
@@ -555,7 +576,7 @@ result background
 }
 .search_tab{
     height: 50px;
-    border-bottom: 1px solid #f07200;
+    border-bottom: 1px solid #bebdbd;
     padding: 10px 25px 0;
     position: relative;
     zoom: 1;
@@ -619,6 +640,16 @@ result background
   Recommended daily background
 
 */
+.todayrecmd_bg{
+  height: 450px;
+  width: 100%;
+  background-image: url(cat.jpeg);
+  background-repeat: no-repeat;
+  background-size: 500px;
+  background-position-x: 100%;
+  position: relative;
+  display: inline-block;
+}
 .todayrecmd {
   background: #ffffff;
   position: relative;
@@ -710,14 +741,26 @@ result background
   font-size: 16px;
   float: right;
   padding-top: 300px;
-  color: #f07200;
+  color: #777777;
   font-weight: bolder;
 }
+/* cat tooltip */
+.cat{
+  background-image: url(cat.jpeg);
+  background-position: -465px -100px;
+  position: absolute;
+  display: inline-block;
+  height: 200px;
+  width: 170px;
+  top: 100px;
+  right: 0;
+  cursor: pointer;
+  outline: none;
+  background-color: #fff;
+}
 
-/* 
-
+/*
   video play background
-
 */
 .myModal-content{
   width: 642px;
@@ -726,3 +769,5 @@ result background
 #videodemo:focus{ 
   outline:none   
 }
+
+

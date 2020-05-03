@@ -9,7 +9,7 @@
         <div class="container">
             <div class="left_col">
                 <div class="hottoper">
-                    <dl >
+                    <dl>
                         <dt>
                             <h4><strong>本月热度排行榜TOP10</strong></h4>
                             <p style="font-weight: lighter;">近期1个月内，最受热议的电影</p>
@@ -67,7 +67,11 @@
 
             <div class="right_col">
                 <div>
-                    <h3 class="mt04">高分排行榜TOP10</h3>
+                    <div class="tooltip-options">
+                        <div data-toggle="tooltip"  title="来源于豆瓣评分" data-placement="left">
+                            <h3 class="mt04">高分排行榜TOP10</h3>
+                        </div>
+                    </div>
                     <div class="data_top">
                         <ul>
                             {% for movie in top_movies_list %}
@@ -133,6 +137,9 @@
         </div><!--container-->
     </div><!--pan_setting-->
 
+    <script>
+        $(function () { $("[data-toggle='tooltip']").tooltip(); });
+    </script>
     <footer class="footer">
         <div class="container">
             <div class="footer_display">
